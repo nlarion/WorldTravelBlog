@@ -1,8 +1,20 @@
-﻿<html>
-<head>
-    <title>Travel Blog</title>
-</head>
-<body>
-    <h2>Welcome to the Bloggggg</h2>
-</body>
-</html>
+﻿@{
+    ViewData["Title"] = "Travel Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<TravelBlog.Models.Location>
+
+<h2>OMG Travel Blog</h2>
+
+<ul>
+@foreach (var listLocation in Model)
+{
+    <li>@Html.DisplayFor(modelItem => listLocation.Name)</li>
+    <ul>
+        <li>@Html.DisplayFor(modelItem => listLocation.Description)</li>
+        <li>@Html.DisplayFor(modelItem => listLocation.City)</li>
+        <li>@Html.DisplayFor(modelItem => listLocation.Country)</li>
+    </ul>
+}
+</ul>
