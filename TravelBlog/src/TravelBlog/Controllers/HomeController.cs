@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using TravelBlog.Models;
+using Microsoft.Data.Entity;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -41,6 +42,20 @@ namespace TravelBlog.Controllers
         {
             var thisLocation = db.Locations.FirstOrDefault(items => items.LocationId == id);
             db.Locations.Remove(thisLocation);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Update(int id)
+        {
+            var thisItem = db.Locations.FirstOrDefault(locations => locations.LocationId == id);
+            return View(thisItem);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Location location)
+        {
+            db.Entry(location).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
