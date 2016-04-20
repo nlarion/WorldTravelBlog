@@ -12,10 +12,37 @@ namespace TravelBlog.Controllers
     public class HomeController : Controller
     {
         private TravelBlogDbContext db = new TravelBlogDbContext();
-        // GET: /<controller>/
         public IActionResult Index()
         {
             return View(db.Locations.ToList());
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Location location)
+        {
+            db.Locations.Add(location);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var thisLocation = db.Locations.FirstOrDefault(items => items.LocationId == id);
+            return View(thisLocation);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var thisLocation = db.Locations.FirstOrDefault(items => items.LocationId == id);
+            db.Locations.Remove(thisLocation);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
