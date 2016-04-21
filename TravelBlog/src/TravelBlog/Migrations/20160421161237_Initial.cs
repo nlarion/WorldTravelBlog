@@ -32,18 +32,18 @@ namespace TravelBlog.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Date = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    LocationLocationId = table.Column<int>(nullable: true),
+                    LocationId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Experience", x => x.ExperienceId);
                     table.ForeignKey(
-                        name: "FK_Experience_Location_LocationLocationId",
-                        column: x => x.LocationLocationId,
+                        name: "FK_Experience_Location_LocationId",
+                        column: x => x.LocationId,
                         principalTable: "Locations",
                         principalColumn: "LocationId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateTable(
                 name: "Peoples",
@@ -51,18 +51,18 @@ namespace TravelBlog.Migrations
                 {
                     PeopleId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ExperienceExperienceId = table.Column<int>(nullable: true),
+                    ExperienceId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_People", x => x.PeopleId);
                     table.ForeignKey(
-                        name: "FK_People_Experience_ExperienceExperienceId",
-                        column: x => x.ExperienceExperienceId,
+                        name: "FK_People_Experience_ExperienceId",
+                        column: x => x.ExperienceId,
                         principalTable: "Experiences",
                         principalColumn: "ExperienceId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
         }
 

@@ -8,7 +8,6 @@
 <h2>OMG Travel Blog</h2>
 <h2>Experiences</h2>
 
-<h2>To Do List</h2>
 <hr />
 <table class="table">
     <tr>
@@ -16,10 +15,13 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Location.Name)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
         </th>
     </tr>
 
@@ -27,10 +29,13 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => listExperience.Name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => listExperience.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => listExperience.Location.Name)
+                @Html.DisplayFor(modelItem => listExperience.Date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => listExperience.Location.Name)
