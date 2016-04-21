@@ -10,7 +10,7 @@ namespace TravelBlog.Models
     {
         public DbSet<Location> Locations { get; set; }
 
-        public DbSet<Experience> Expiences { get; set; }
+        public DbSet<Experience> Experiences { get; set; }
 
         public DbSet<People> Peoples { get; set; }
 

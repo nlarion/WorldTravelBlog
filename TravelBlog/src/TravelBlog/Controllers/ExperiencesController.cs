@@ -14,12 +14,24 @@ namespace TravelBlog.Controllers
         private TravelBlogDbContext db = new TravelBlogDbContext();
         public IActionResult Index()
         {
-            return View(db.Expiences.Include(experience => experience.Location).ToList());
+            return View(db.Experiences.Include(experience => experience.Location).ToList());
         }
         public IActionResult Details(int id)
         {
-            var thisItem = db.Expiences.FirstOrDefault(experience => experience.ExperienceId == id);
-            return View(thisItem);
+            //Dictionary<string, object> MyDictionary = new Dictionary<string, object>();
+            //MyDictionary.Add("Experience", db.Experiences.FirstOrDefault(experiences => experiences.ExperienceId == id));
+            //MyDictionary.Add("Location", db.Locations.ToList());
+            //object MyLocation = MyDictionary["Experience"];
+            //System.Reflection.PropertyInfo pi = MyLocation.GetType().GetProperty("LocationId");
+            //int name = (int)(pi.GetValue(MyLocation, null));
+            //MyDictionary.Add("Location", db.Locations.FirstOrDefault(experiences => experiences.LocationId == MyLocation;
+            //var thisItem = db.Experiences.Where(experiences => experiences.ExperienceId == id).Include(location => location.Location).ToList();
+            ExperienceLocation MyEperienceLocation = new ExperienceLocation
+            {
+                locationList = db.Locations.ToList(),
+                experience = db.Experiences.FirstOrDefault(experiences => experiences.ExperienceId == id)
+            };
+            return View(MyEperienceLocation);
         }
         public ActionResult Create()
         {
@@ -29,13 +41,13 @@ namespace TravelBlog.Controllers
         [HttpPost]
         public ActionResult Create(Experience experience)
         {
-            db.Expiences.Add(experience);
+            db.Experiences.Add(experience);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
         public ActionResult Update(int id)
         {
-            var thisExperience = db.Expiences.FirstOrDefault(items => items.ExperienceId == id);
+            var thisExperience = db.Experiences.FirstOrDefault(items => items.ExperienceId == id);
             ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "Name");
             return View(thisExperience);
         }
@@ -48,14 +60,14 @@ namespace TravelBlog.Controllers
         }
         public ActionResult Delete(int id)
         {
-            var thisExperence = db.Expiences.FirstOrDefault(experience => experience.ExperienceId == id);
-            return View(thisExperence);
+            var thisExperience = db.Experiences.FirstOrDefault(experience => experience.ExperienceId == id);
+            return View(thisExperience);
         }
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            var thisExperence = db.Expiences.FirstOrDefault(experience => experience.ExperienceId == id);
-            db.Expiences.Remove(thisExperence);
+            var thisExperience = db.Experiences.FirstOrDefault(experience => experience.ExperienceId == id);
+            db.Experiences.Remove(thisExperience);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
