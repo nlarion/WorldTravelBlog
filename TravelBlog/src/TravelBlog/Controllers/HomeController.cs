@@ -33,7 +33,7 @@ namespace TravelBlog.Controllers
 
         public IActionResult Delete(int id)
         {
-            var thisLocation = db.Locations.FirstOrDefault(items => items.LocationId == id);
+            var thisLocation = db.Locations.FirstOrDefault(locations => locations.LocationId == id);
             return View(thisLocation);
         }
 
@@ -48,8 +48,8 @@ namespace TravelBlog.Controllers
 
         public IActionResult Update(int id)
         {
-            var thisItem = db.Locations.FirstOrDefault(locations => locations.LocationId == id);
-            return View(thisItem);
+            var thisLocation = db.Locations.FirstOrDefault(locations => locations.LocationId == id);
+            return View(thisLocation);
         }
 
         [HttpPost]
