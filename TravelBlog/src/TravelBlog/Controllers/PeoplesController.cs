@@ -11,12 +11,13 @@ using Microsoft.AspNet.Mvc.Rendering;
 
 namespace TravelBlog.Controllers
 {
-    public class PeoplesControllers : Controller
+    public class PeoplesController : Controller
     {
         private TravelBlogDbContext db = new TravelBlogDbContext();
         public IActionResult Index()
         {
-            return View(db.Peoples.Include(people => people.PeopleId).ToList());
+            ViewBag.Experience = db.Experiences.ToList();
+            return View(db.Peoples.ToList());
         }
         public IActionResult Details(int id)
         {
@@ -25,12 +26,13 @@ namespace TravelBlog.Controllers
             //    locationList = db.Locations.ToList(),
             //    experience = db.Experiences.FirstOrDefault(experiences => experiences.ExperienceId == id)
             //};
+            ViewBag.Experience = db.Experiences.ToList();
             var people = db.Peoples.FirstOrDefault(experiences => experiences.PeopleId == id);
             return View(people);
         }
         public ActionResult Create()
         {
-            ViewBag.ExperienceId = new SelectList(db.Locations, "ExperienceId", "Name");
+            ViewBag.ExperienceId = new SelectList(db.Experiences, "ExperienceId", "Name");
             return View();
         }
         [HttpPost]
@@ -43,7 +45,7 @@ namespace TravelBlog.Controllers
         public ActionResult Update(int id)
         {
             var thisExperience = db.Peoples.FirstOrDefault(items => items.PeopleId == id);
-            ViewBag.ExperienceId = new SelectList(db.Locations, "ExperienceId", "Name");
+            ViewBag.ExperienceId = new SelectList(db.Experiences, "ExperienceId", "Name");
             return View(thisExperience);
         }
         [HttpPost]

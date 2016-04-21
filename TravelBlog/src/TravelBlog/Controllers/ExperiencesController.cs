@@ -18,20 +18,9 @@ namespace TravelBlog.Controllers
         }
         public IActionResult Details(int id)
         {
-            //Dictionary<string, object> MyDictionary = new Dictionary<string, object>();
-            //MyDictionary.Add("Experience", db.Experiences.FirstOrDefault(experiences => experiences.ExperienceId == id));
-            //MyDictionary.Add("Location", db.Locations.ToList());
-            //object MyLocation = MyDictionary["Experience"];
-            //System.Reflection.PropertyInfo pi = MyLocation.GetType().GetProperty("LocationId");
-            //int name = (int)(pi.GetValue(MyLocation, null));
-            //MyDictionary.Add("Location", db.Locations.FirstOrDefault(experiences => experiences.LocationId == MyLocation;
-            //var thisItem = db.Experiences.Where(experiences => experiences.ExperienceId == id).Include(location => location.Location).ToList();
-            ExperienceLocation MyEperienceLocation = new ExperienceLocation
-            {
-                locationList = db.Locations.ToList(),
-                experience = db.Experiences.FirstOrDefault(experiences => experiences.ExperienceId == id)
-            };
-            return View(MyEperienceLocation);
+            ViewBag.Location = db.Locations.ToList();
+            var experience = db.Experiences.FirstOrDefault(experiences => experiences.ExperienceId == id);
+            return View(experience);
         }
         public ActionResult Create()
         {

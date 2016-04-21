@@ -3,20 +3,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model TravelBlog.Models.ExperienceLocation
-<h2>Experience Details</h2>
+@model TravelBlog.Models.People
+<h2>Person Details</h2>
 <hr />
 
 
-<p>@Html.DisplayNameFor(model => model.experience.Name): @Html.DisplayFor(model => model.experience.Name)</p>
-<p>@Html.DisplayNameFor(model => model.experience.Description) : @Html.DisplayFor(model => model.experience.Description)</p>
-<p>@Html.DisplayNameFor(model => model.experience.Date) : @Html.DisplayFor(model => model.experience.Date)</p>
-@foreach (var item in Model.locationList)
+<p>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</p>
+<p>@Html.DisplayNameFor(model => model.Experience): @Html.DisplayFor(model => model.Experience.Name)</p>
+
+@*@foreach (var item in Model.locationList)
 {
     @if (Model.experience.LocationId == item.LocationId)
     {
         @item.Name
     }
-}
+}*@
 
-<p>@Html.ActionLink("Edit", "Update", new { id = Model.experience.ExperienceId }) | @Html.ActionLink("Back to List", "Index")</p>
+<p>@Html.ActionLink("Edit", "Update", new { id = Model.PeopleId }) | @Html.ActionLink("Back to List", "Index")</p>

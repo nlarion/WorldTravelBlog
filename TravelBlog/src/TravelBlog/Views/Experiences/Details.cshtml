@@ -3,20 +3,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model TravelBlog.Models.ExperienceLocation
+@model TravelBlog.Models.Experience
 <h2>Experience Details</h2>
 <hr />
 
 
-<p>@Html.DisplayNameFor(model => model.experience.Name): @Html.DisplayFor(model => model.experience.Name)</p>
-<p>@Html.DisplayNameFor(model => model.experience.Description) : @Html.DisplayFor(model => model.experience.Description)</p>
-<p>@Html.DisplayNameFor(model => model.experience.Date) : @Html.DisplayFor(model => model.experience.Date)</p>
-@foreach (var item in Model.locationList)
-{
-    @if (Model.experience.LocationId == item.LocationId)
-    {
-        @item.Name
-    }
-}
-
-<p>@Html.ActionLink("Edit", "Update", new { id = Model.experience.ExperienceId }) | @Html.ActionLink("Back to List", "Index")</p>
+<p>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</p>
+<p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
+<p>@Html.DisplayNameFor(model => model.Date) : @Html.DisplayFor(model => model.Date)</p>
+<p>@Html.DisplayNameFor(model => model.Location) : @Html.DisplayFor(model => model.Location.Name)</p>
+<p>@Html.ActionLink("Edit", "Update", new { id = Model.ExperienceId }) | @Html.ActionLink("Back to List", "Index")</p>
